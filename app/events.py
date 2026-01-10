@@ -1,6 +1,6 @@
 from pathlib import Path
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QTextCursor
+from PySide6.QtGui import QTextCursor, QAction
 
 
 def save_text(textbox, filename="myfile.txt"):
@@ -32,3 +32,21 @@ def move_cursor_to_end(textbox):
     cursor = textbox.textCursor()
     cursor.movePosition(QTextCursor.End)
     textbox.setTextCursor(cursor)
+
+def initialize_menu_bar(parent):
+    menu_bar = parent.menuBar()
+    file_menu = menu_bar.addMenu("File")
+
+    new_action = QAction("New", parent)
+    new_action.setShortcut("Ctrl+N")
+    new_action.triggered.connect(lambda: new_file())
+    file_menu.addAction(new_action)
+
+    save_action = QAction("Save", parent)
+    save_action.setShortcut("Ctrl+S")
+    save_action.triggered.connect(lambda: save_text(parent.textbox))
+    file_menu.addAction(save_action)
+
+    edit_menu = menu_bar.addMenu("Edit")
+def new_file():
+    print("Not implemented")

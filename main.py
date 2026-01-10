@@ -17,6 +17,8 @@ class EditorWindow(QMainWindow):
 
         load_text(self.textbox)
         move_cursor_to_end(self.textbox)
+
+        initialize_menu_bar(self)
         self.showMaximized()
 
 
@@ -24,7 +26,6 @@ class EditorWindow(QMainWindow):
         handled = handle_shortcuts(event, self.textbox)
         if not handled:
             super().keyPressEvent(event)
-
 def main():
     app = QApplication(sys.argv)
     window = EditorWindow()
