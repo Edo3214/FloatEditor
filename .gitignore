@@ -1,0 +1,26 @@
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# PyCharm
+.idea/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# MacOS
+.DS_Store
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
