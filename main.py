@@ -2,31 +2,33 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QTextEdit, QPushButton, QVBoxLayout, QWidget
 from app.events import *
 
+class EditorWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("FloatEditor")
+
+        central_widget = QWidget()
+        layout = QVBoxLayout()
+        central_widget.setLayout(layout)
+        self.setCentralWidget(central_widget)
+
+        self.textbox = QTextEdit()
+        layout.addWidget(self.textbox)
+
+        load_text(self.textbox)
+        move_cursor_to_end(self.textbox)
+        self.showMaximized()
+
+
+    def keyPressEvent(self, event):
+        handled = handle_shortcuts(event, self.textbox)
+        if not handled:
+            super().keyPressEvent(event)
+
 def main():
     app = QApplication(sys.argv)
-    window = QMainWindow()
-
-
-    # Centralni widget koji drži layout
-    central_widget = QWidget()
-    layout = QVBoxLayout()
-
-    # Rich textbox
-    textbox = QTextEdit()
-    layout.addWidget(textbox)
-    load_text(textbox)
-
-    # Dugme
-    btnSave = QPushButton("Save")
-    btnSave.clicked.connect(lambda: save_text(textbox))
-    layout.addWidget(btnSave)
-
-    # Primijeni layout na centralni widget
-    central_widget.setLayout(layout)
-    window.setCentralWidget(central_widget)
-    window.showMaximized()
+    window = EditorWindow()
     sys.exit(app.exec())
-
 
 if __name__ == "__main__":
     main()
