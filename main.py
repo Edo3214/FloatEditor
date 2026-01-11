@@ -15,8 +15,7 @@ class EditorWindow(QMainWindow):
         self.textbox = QTextEdit()
         layout.addWidget(self.textbox)
 
-        load_text(self.textbox)
-        move_cursor_to_end(self.textbox)
+
 
         initialize_menu_bar(self)
         self.showMaximized()
